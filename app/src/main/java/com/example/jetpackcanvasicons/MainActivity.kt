@@ -10,6 +10,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -69,132 +70,190 @@ fun socialMediaUI() {
 
             Text(textAlign = TextAlign.Center, text = "Social Media Icons", modifier = Modifier.padding(15.dp).fillMaxWidth())
 
+
+
+                Canvas(
+                    modifier = Modifier.size(100.dp)
+                        .padding(10.dp).offset(10.dp, 30.dp)
+                ) {
+
+                    //instagram
+
+                    val instaColors = listOf(Color.Yellow, Color.Red, Color.Magenta)
+
+                    drawRoundRect(
+                        //  color = Color.Yellow,
+                        brush = Brush.linearGradient(colors = instaColors),
+                        cornerRadius = CornerRadius(50f, 50f),
+                        style = Stroke(width = 16f, cap = StrokeCap.Round)
+                    )
+                    drawCircle(
+                        brush = Brush.linearGradient(colors = instaColors),
+                        radius = 40f,
+                        style = Stroke(width = 20f, cap = StrokeCap.Round)
+                    )
+
+                    drawCircle(
+                        brush = Brush.linearGradient(colors = instaColors),
+                        radius = 15f,
+                        center = Offset(this.size.width * .8f, this.size.height * .2f)
+
+                    )
+                }
+
+            //messenger
+
+
             Canvas(
-                modifier = Modifier.size(100.dp)
-                    .padding(10.dp).offset(10.dp, 30.dp).background(Color.White)
+                modifier = Modifier.size(100.dp).offset(100.dp, 30.dp).padding(10.dp)
             ) {
+                val colors = listOf(Color(0xFF02b8f9), Color(0xFF0277fe))
 
-                //instagram
+                val trianglePath = Path().let {
+                    it.moveTo(this.size.width * .20f, this.size.height * .77f)
+                    it.lineTo(this.size.width * .20f, this.size.height * 0.95f)
+                    it.lineTo(this.size.width * .37f, this.size.height * 0.86f)
+                    it.close()
+                    it
+                }
 
-                val instaColors = listOf(Color.Yellow, Color.Red, Color.Magenta)
+
+                val electricPath = Path().let {
+                    it.moveTo(this.size.width * .20f, this.size.height * 0.60f)
+                    it.lineTo(this.size.width * .45f, this.size.height * 0.35f)
+                    it.lineTo(this.size.width * 0.56f, this.size.height * 0.46f)
+                    it.lineTo(this.size.width * 0.78f, this.size.height * 0.35f)
+                    it.lineTo(this.size.width * 0.54f, this.size.height * 0.60f)
+                    it.lineTo(this.size.width * 0.43f, this.size.height * 0.45f)
+                    it.close()
+                    it
+                }
+
+                drawOval(
+                    Brush.verticalGradient(colors = colors),
+                    size = Size(this.size.width, this.size.height * 0.95f)
+                )
+
+                drawPath(
+                    path = trianglePath,
+                    Brush.verticalGradient(colors = colors),
+                    style = Stroke(width = 15f, cap = StrokeCap.Round)
+                )
+
+                drawPath(
+                    path = electricPath, color = Color.White
+                )
+
+            }
+
+
+            //google photos
+            Canvas(
+                modifier = Modifier
+                    .size(100.dp).offset(200.dp, 30.dp)
+                    .padding(10.dp)
+            ) {
+                //red
+                drawArc(
+                    color = Color(0xFFf04231),
+                    startAngle = -90f,
+                    sweepAngle = 180f,
+                    useCenter = true,
+                    size = Size(size.width * .50f, size.height * .50f),
+                    topLeft = Offset(size.width * .25f, 0f)
+                )
+
+                //blue
+                drawArc(
+                    color = Color(0xFF4385f7),
+                    startAngle = 0f,
+                    sweepAngle = 180f,
+                    useCenter = true,
+                    size = Size(size.width * .50f, size.height * .50f),
+                    topLeft = Offset(size.width * .50f, size.height * .25f)
+                )
+
+                //green
+                drawArc(
+                    color = Color(0xFF30a952),
+                    startAngle = 0f,
+                    sweepAngle = -180f,
+                    useCenter = true,
+                    size = Size(size.width * .50f, size.height * .50f),
+                    topLeft = Offset(0f, size.height * .25f)
+                )
+
+                //yellow
+                drawArc(
+                    color = Color(0xFFffbf00),
+                    startAngle = 270f,
+                    sweepAngle = -180f,
+                    useCenter = true,
+                    size = Size(size.width * .50f, size.height * .50f),
+                    topLeft = Offset(size.width * .25f, size.height * .50f)
+                )
+
+
+
+            }
+
+            //weather app
+            val backgroundColor = listOf(Color(0xFF2078EE), Color(0xFF74E6FE))
+            val sunColor = listOf(Color(0xFFFFC200), Color(0xFFFFE100))
+
+            Canvas(
+                modifier = Modifier
+                    .size(100.dp).offset(300.dp,30.dp)
+                    .padding(16.dp)
+            ) {
+                val width = size.width
+                val height = size.height
+
+                //cloud
+                val path = Path().apply {
+                    moveTo(width.times(.76f), height.times(.72f))
+                    cubicTo(
+                        width.times(.93f),
+                        height.times(.72f),
+                        width.times(.98f),
+                        height.times(.41f),
+                        width.times(.76f),
+                        height.times(.40f)
+                    )
+                    cubicTo(
+                        width.times(.75f),
+                        height.times(.21f),
+                        width.times(.35f),
+                        height.times(.21f),
+                        width.times(.38f),
+                        height.times(.50f)
+                    )
+                    cubicTo(
+                        width.times(.25f),
+                        height.times(.50f),
+                        width.times(.20f),
+                        height.times(.69f),
+                        width.times(.41f),
+                        height.times(.72f)
+                    )
+                    close()
+                }
 
                 drawRoundRect(
-                    //  color = Color.Yellow,
-                    brush = Brush.linearGradient(colors = instaColors),
-                    cornerRadius = CornerRadius(50f, 50f),
-                    style = Stroke(width = 16f, cap = StrokeCap.Round)
-                )
-                drawCircle(
-                    brush = Brush.linearGradient(colors = instaColors),
-                    radius = 40f,
-                    style = Stroke(width = 20f, cap = StrokeCap.Round)
+                    brush = Brush.verticalGradient(backgroundColor),
+                    cornerRadius = CornerRadius(50f, 50f)
                 )
 
                 drawCircle(
-                    brush = Brush.linearGradient(colors = instaColors),
-                    radius = 15f,
-                    center = Offset(this.size.width * .8f, this.size.height * .2f)
-
+                    brush = Brush.verticalGradient(sunColor),
+                    radius = width.times(.17f),
+                    center = Offset(width.times(.35f), height.times(.35f))
                 )
-            }
-        }
 
-
-        //messenger
-
-
-        Canvas(
-            modifier = Modifier.size(100.dp).offset(100.dp, 30.dp).padding(10.dp)
-        ) {
-            val colors = listOf(Color(0xFF02b8f9), Color(0xFF0277fe))
-
-            val trianglePath = Path().let {
-                it.moveTo(this.size.width * .20f, this.size.height * .77f)
-                it.lineTo(this.size.width * .20f, this.size.height * 0.95f)
-                it.lineTo(this.size.width * .37f, this.size.height * 0.86f)
-                it.close()
-                it
+                drawPath(path = path, color = Color.White.copy(alpha = .90f))
             }
 
-
-            val electricPath = Path().let {
-                it.moveTo(this.size.width * .20f, this.size.height * 0.60f)
-                it.lineTo(this.size.width * .45f, this.size.height * 0.35f)
-                it.lineTo(this.size.width * 0.56f, this.size.height * 0.46f)
-                it.lineTo(this.size.width * 0.78f, this.size.height * 0.35f)
-                it.lineTo(this.size.width * 0.54f, this.size.height * 0.60f)
-                it.lineTo(this.size.width * 0.43f, this.size.height * 0.45f)
-                it.close()
-                it
-            }
-
-            drawOval(
-                Brush.verticalGradient(colors = colors),
-                size = Size(this.size.width, this.size.height * 0.95f)
-            )
-
-            drawPath(
-                path = trianglePath,
-                Brush.verticalGradient(colors = colors),
-                style = Stroke(width = 15f, cap = StrokeCap.Round)
-            )
-
-            drawPath(
-                path = electricPath, color = Color.White
-            )
-
         }
-
-
-        //google photos
-        Canvas(
-            modifier = Modifier
-                .size(100.dp).offset(200.dp, 30.dp)
-                .padding(10.dp)
-        ) {
-            //red
-            drawArc(
-                color = Color(0xFFf04231),
-                startAngle = -90f,
-                sweepAngle = 180f,
-                useCenter = true,
-                size = Size(size.width * .50f, size.height * .50f),
-                topLeft = Offset(size.width * .25f, 0f)
-            )
-
-            //blue
-            drawArc(
-                color = Color(0xFF4385f7),
-                startAngle = 0f,
-                sweepAngle = 180f,
-                useCenter = true,
-                size = Size(size.width * .50f, size.height * .50f),
-                topLeft = Offset(size.width * .50f, size.height * .25f)
-            )
-
-            //green
-            drawArc(
-                color = Color(0xFF30a952),
-                startAngle = 0f,
-                sweepAngle = -180f,
-                useCenter = true,
-                size = Size(size.width * .50f, size.height * .50f),
-                topLeft = Offset(0f, size.height * .25f)
-            )
-
-            //yellow
-            drawArc(
-                color = Color(0xFFffbf00),
-                startAngle = 270f,
-                sweepAngle = -180f,
-                useCenter = true,
-                size = Size(size.width * .50f, size.height * .50f),
-                topLeft = Offset(size.width * .25f, size.height * .50f)
-            )
-
-
-        }
-
 
     }
 
